@@ -1,6 +1,6 @@
-diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/querypb/query.pb.go
+diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/querypb/query.pb.go
 --- /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go	2018-06-05 08:45:47.000000000 -0700
-+++ /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/querypb/query.pb.go	2017-10-18 18:06:33.000000000 -0700
++++ /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/querypb/query.pb.go	2017-10-18 18:06:33.000000000 -0700
 @@ -62,30 +62,24 @@
  	SplitQueryResponse
  	StreamHealthRequest
@@ -13,7 +13,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
  */
 -package query
 +package querypb
- 
+
 -import proto "github.com/golang/protobuf/proto"
 -import fmt "fmt"
 -import math "math"
@@ -41,56 +41,56 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +	}
 +	return strconv.Itoa(int(v))
 +}
- 
+
  // Flags sent from the MySQL C API
  type MySqlFlag int32
 @@ -159,9 +153,8 @@
  }
- 
+
  func (x MySqlFlag) String() string {
 -	return proto.EnumName(MySqlFlag_name, int32(x))
 +	return EnumName(MySqlFlag_name, int32(x))
  }
 -func (MySqlFlag) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
- 
+
  // Flag allows us to qualify types by their common properties.
  type Flag int32
 @@ -196,9 +189,8 @@
  }
- 
+
  func (x Flag) String() string {
 -	return proto.EnumName(Flag_name, int32(x))
 +	return EnumName(Flag_name, int32(x))
  }
 -func (Flag) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
- 
+
  // Type defines the various supported data types in bind vars
  // and query results.
 @@ -375,9 +367,8 @@
  }
- 
+
  func (x Type) String() string {
 -	return proto.EnumName(Type_name, int32(x))
 +	return EnumName(Type_name, int32(x))
  }
 -func (Type) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
- 
+
  // TransactionState represents the state of a distributed transaction.
  type TransactionState int32
 @@ -403,9 +394,8 @@
  }
- 
+
  func (x TransactionState) String() string {
 -	return proto.EnumName(TransactionState_name, int32(x))
 +	return EnumName(TransactionState_name, int32(x))
  }
 -func (TransactionState) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
- 
+
  type ExecuteOptions_IncludedFields int32
- 
+
 @@ -427,10 +417,7 @@
  }
- 
+
  func (x ExecuteOptions_IncludedFields) String() string {
 -	return proto.EnumName(ExecuteOptions_IncludedFields_name, int32(x))
 -}
@@ -98,22 +98,22 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 -	return fileDescriptor0, []int{6, 0}
 +	return EnumName(ExecuteOptions_IncludedFields_name, int32(x))
  }
- 
+
  type ExecuteOptions_Workload int32
 @@ -456,9 +443,8 @@
  }
- 
+
  func (x ExecuteOptions_Workload) String() string {
 -	return proto.EnumName(ExecuteOptions_Workload_name, int32(x))
 +	return EnumName(ExecuteOptions_Workload_name, int32(x))
  }
 -func (ExecuteOptions_Workload) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{6, 1} }
- 
+
  type ExecuteOptions_TransactionIsolation int32
- 
+
 @@ -486,10 +472,7 @@
  }
- 
+
  func (x ExecuteOptions_TransactionIsolation) String() string {
 -	return proto.EnumName(ExecuteOptions_TransactionIsolation_name, int32(x))
 -}
@@ -121,11 +121,11 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 -	return fileDescriptor0, []int{6, 2}
 +	return EnumName(ExecuteOptions_TransactionIsolation_name, int32(x))
  }
- 
+
  // The category of one statement.
 @@ -513,10 +496,7 @@
  }
- 
+
  func (x StreamEvent_Statement_Category) String() string {
 -	return proto.EnumName(StreamEvent_Statement_Category_name, int32(x))
 -}
@@ -133,11 +133,11 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 -	return fileDescriptor0, []int{11, 0, 0}
 +	return EnumName(StreamEvent_Statement_Category_name, int32(x))
  }
- 
+
  type SplitQueryRequest_Algorithm int32
 @@ -536,27 +516,22 @@
  }
- 
+
  func (x SplitQueryRequest_Algorithm) String() string {
 -	return proto.EnumName(SplitQueryRequest_Algorithm_name, int32(x))
 -}
@@ -145,7 +145,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 -	return fileDescriptor0, []int{49, 0}
 +	return EnumName(SplitQueryRequest_Algorithm_name, int32(x))
  }
- 
+
 +/*
  // Target describes what the client expects the tablet is.
  // If the tablet does not match, an error is returned.
@@ -157,7 +157,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 -	// is not used when Target is part of the Session sent by the client.
 -	Cell string `protobuf:"bytes,4,opt,name=cell" json:"cell,omitempty"`
  }
- 
+
  func (m *Target) Reset()                    { *m = Target{} }
 -func (m *Target) String() string            { return proto.CompactTextString(m) }
 -func (*Target) ProtoMessage()               {}
@@ -165,25 +165,25 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *Target) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *Target) GetKeyspace() string {
  	if m != nil {
 @@ -579,12 +554,6 @@
  	return topodata.TabletType_UNKNOWN
  }
- 
+
 -func (m *Target) GetCell() string {
 -	if m != nil {
 -		return m.Cell
 -	}
 -	return ""
 -}
- 
+
  // VTGateCallerID is sent by VTGate to VTTablet to describe the
  // caller. If possible, this information is secure. For instance,
 @@ -600,9 +569,9 @@
  }
- 
+
  func (m *VTGateCallerID) Reset()                    { *m = VTGateCallerID{} }
 -func (m *VTGateCallerID) String() string            { return proto.CompactTextString(m) }
 -func (*VTGateCallerID) ProtoMessage()               {}
@@ -191,12 +191,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *VTGateCallerID) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *VTGateCallerID) GetUsername() string {
  	if m != nil {
 @@ -634,9 +603,9 @@
  }
- 
+
  func (m *EventToken) Reset()                    { *m = EventToken{} }
 -func (m *EventToken) String() string            { return proto.CompactTextString(m) }
 -func (*EventToken) ProtoMessage()               {}
@@ -204,7 +204,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *EventToken) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *EventToken) GetTimestamp() int64 {
  	if m != nil {
 @@ -658,6 +627,7 @@
@@ -212,52 +212,52 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
  	return ""
  }
 +*/
- 
+
  // Value represents a typed value.
  type Value struct {
 @@ -665,10 +635,8 @@
  	Value []byte `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
  }
- 
+
 -func (m *Value) Reset()                    { *m = Value{} }
 -func (m *Value) String() string            { return proto.CompactTextString(m) }
 -func (*Value) ProtoMessage()               {}
 -func (*Value) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
 +func (m *Value) Reset()         { *m = Value{} }
 +func (m *Value) String() string { return "TODO" }
- 
+
  func (m *Value) GetType() Type {
  	if m != nil {
 @@ -692,10 +660,8 @@
  	Values []*Value `protobuf:"bytes,3,rep,name=values" json:"values,omitempty"`
  }
- 
+
 -func (m *BindVariable) Reset()                    { *m = BindVariable{} }
 -func (m *BindVariable) String() string            { return proto.CompactTextString(m) }
 -func (*BindVariable) ProtoMessage()               {}
 -func (*BindVariable) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
 +func (m *BindVariable) Reset()         { *m = BindVariable{} }
 +func (m *BindVariable) String() string { return "TODO" }
- 
+
  func (m *BindVariable) GetType() Type {
  	if m != nil {
 @@ -727,10 +693,8 @@
  	BindVariables map[string]*BindVariable `protobuf:"bytes,2,rep,name=bind_variables,json=bindVariables" json:"bind_variables,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
  }
- 
+
 -func (m *BoundQuery) Reset()                    { *m = BoundQuery{} }
 -func (m *BoundQuery) String() string            { return proto.CompactTextString(m) }
 -func (*BoundQuery) ProtoMessage()               {}
 -func (*BoundQuery) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
 +func (m *BoundQuery) Reset()         { *m = BoundQuery{} }
 +func (m *BoundQuery) String() string { return "TODO" }
- 
+
  func (m *BoundQuery) GetSql() string {
  	if m != nil {
 @@ -746,6 +710,7 @@
  	return nil
  }
- 
+
 +/*
  // ExecuteOptions is passed around for all Execute calls.
  type ExecuteOptions struct {
@@ -270,7 +270,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 -	// By default all query plans are cached.
 -	SkipQueryPlanCache bool `protobuf:"varint,10,opt,name=skip_query_plan_cache,json=skipQueryPlanCache" json:"skip_query_plan_cache,omitempty"`
  }
- 
+
  func (m *ExecuteOptions) Reset()                    { *m = ExecuteOptions{} }
 -func (m *ExecuteOptions) String() string            { return proto.CompactTextString(m) }
 -func (*ExecuteOptions) ProtoMessage()               {}
@@ -278,13 +278,13 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *ExecuteOptions) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *ExecuteOptions) GetIncludeEventToken() bool {
  	if m != nil {
 @@ -833,13 +795,6 @@
  	return ExecuteOptions_DEFAULT
  }
- 
+
 -func (m *ExecuteOptions) GetSkipQueryPlanCache() bool {
 -	if m != nil {
 -		return m.SkipQueryPlanCache
@@ -297,7 +297,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
  	// name of the field as returned by mysql C API
 @@ -864,9 +819,9 @@
  }
- 
+
  func (m *Field) Reset()                    { *m = Field{} }
 -func (m *Field) String() string            { return proto.CompactTextString(m) }
 -func (*Field) ProtoMessage()               {}
@@ -305,12 +305,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *Field) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *Field) GetName() string {
  	if m != nil {
 @@ -950,9 +905,9 @@
  }
- 
+
  func (m *Row) Reset()                    { *m = Row{} }
 -func (m *Row) String() string            { return proto.CompactTextString(m) }
 -func (*Row) ProtoMessage()               {}
@@ -318,12 +318,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *Row) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *Row) GetLengths() []int64 {
  	if m != nil {
 @@ -980,9 +935,9 @@
  }
- 
+
  func (m *ResultExtras) Reset()                    { *m = ResultExtras{} }
 -func (m *ResultExtras) String() string            { return proto.CompactTextString(m) }
 -func (*ResultExtras) ProtoMessage()               {}
@@ -331,12 +331,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *ResultExtras) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *ResultExtras) GetEventToken() *EventToken {
  	if m != nil {
 @@ -1016,9 +971,9 @@
  }
- 
+
  func (m *QueryResult) Reset()                    { *m = QueryResult{} }
 -func (m *QueryResult) String() string            { return proto.CompactTextString(m) }
 -func (*QueryResult) ProtoMessage()               {}
@@ -344,12 +344,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *QueryResult) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *QueryResult) GetFields() []*Field {
  	if m != nil {
 @@ -1066,9 +1021,9 @@
  }
- 
+
  func (m *StreamEvent) Reset()                    { *m = StreamEvent{} }
 -func (m *StreamEvent) String() string            { return proto.CompactTextString(m) }
 -func (*StreamEvent) ProtoMessage()               {}
@@ -357,12 +357,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *StreamEvent) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *StreamEvent) GetStatements() []*StreamEvent_Statement {
  	if m != nil {
 @@ -1097,9 +1052,9 @@
  }
- 
+
  func (m *StreamEvent_Statement) Reset()                    { *m = StreamEvent_Statement{} }
 -func (m *StreamEvent_Statement) String() string            { return proto.CompactTextString(m) }
 -func (*StreamEvent_Statement) ProtoMessage()               {}
@@ -370,20 +370,20 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *StreamEvent_Statement) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *StreamEvent_Statement) GetCategory() StreamEvent_Statement_Category {
  	if m != nil {
 @@ -1136,6 +1091,7 @@
  	return nil
  }
- 
+
 +
  // ExecuteRequest is the payload to Execute
  type ExecuteRequest struct {
  	EffectiveCallerId *vtrpc.CallerID `protobuf:"bytes,1,opt,name=effective_caller_id,json=effectiveCallerId" json:"effective_caller_id,omitempty"`
 @@ -1147,9 +1103,9 @@
  }
- 
+
  func (m *ExecuteRequest) Reset()                    { *m = ExecuteRequest{} }
 -func (m *ExecuteRequest) String() string            { return proto.CompactTextString(m) }
 -func (*ExecuteRequest) ProtoMessage()               {}
@@ -391,12 +391,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *ExecuteRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *ExecuteRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1199,9 +1155,9 @@
  }
- 
+
  func (m *ExecuteResponse) Reset()                    { *m = ExecuteResponse{} }
 -func (m *ExecuteResponse) String() string            { return proto.CompactTextString(m) }
 -func (*ExecuteResponse) ProtoMessage()               {}
@@ -404,12 +404,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *ExecuteResponse) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *ExecuteResponse) GetResult() *QueryResult {
  	if m != nil {
 @@ -1221,9 +1177,9 @@
  }
- 
+
  func (m *ResultWithError) Reset()                    { *m = ResultWithError{} }
 -func (m *ResultWithError) String() string            { return proto.CompactTextString(m) }
 -func (*ResultWithError) ProtoMessage()               {}
@@ -417,12 +417,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *ResultWithError) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *ResultWithError) GetError() *vtrpc.RPCError {
  	if m != nil {
 @@ -1251,9 +1207,9 @@
  }
- 
+
  func (m *ExecuteBatchRequest) Reset()                    { *m = ExecuteBatchRequest{} }
 -func (m *ExecuteBatchRequest) String() string            { return proto.CompactTextString(m) }
 -func (*ExecuteBatchRequest) ProtoMessage()               {}
@@ -430,12 +430,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *ExecuteBatchRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *ExecuteBatchRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1310,9 +1266,9 @@
  }
- 
+
  func (m *ExecuteBatchResponse) Reset()                    { *m = ExecuteBatchResponse{} }
 -func (m *ExecuteBatchResponse) String() string            { return proto.CompactTextString(m) }
 -func (*ExecuteBatchResponse) ProtoMessage()               {}
@@ -443,12 +443,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *ExecuteBatchResponse) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *ExecuteBatchResponse) GetResults() []*QueryResult {
  	if m != nil {
 @@ -1331,9 +1287,9 @@
  }
- 
+
  func (m *StreamExecuteRequest) Reset()                    { *m = StreamExecuteRequest{} }
 -func (m *StreamExecuteRequest) String() string            { return proto.CompactTextString(m) }
 -func (*StreamExecuteRequest) ProtoMessage()               {}
@@ -456,12 +456,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *StreamExecuteRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *StreamExecuteRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1376,9 +1332,9 @@
  }
- 
+
  func (m *StreamExecuteResponse) Reset()                    { *m = StreamExecuteResponse{} }
 -func (m *StreamExecuteResponse) String() string            { return proto.CompactTextString(m) }
 -func (*StreamExecuteResponse) ProtoMessage()               {}
@@ -469,12 +469,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *StreamExecuteResponse) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *StreamExecuteResponse) GetResult() *QueryResult {
  	if m != nil {
 @@ -1396,9 +1352,9 @@
  }
- 
+
  func (m *BeginRequest) Reset()                    { *m = BeginRequest{} }
 -func (m *BeginRequest) String() string            { return proto.CompactTextString(m) }
 -func (*BeginRequest) ProtoMessage()               {}
@@ -482,12 +482,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *BeginRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *BeginRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1434,9 +1390,9 @@
  }
- 
+
  func (m *BeginResponse) Reset()                    { *m = BeginResponse{} }
 -func (m *BeginResponse) String() string            { return proto.CompactTextString(m) }
 -func (*BeginResponse) ProtoMessage()               {}
@@ -495,12 +495,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *BeginResponse) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *BeginResponse) GetTransactionId() int64 {
  	if m != nil {
 @@ -1454,9 +1410,9 @@
  }
- 
+
  func (m *CommitRequest) Reset()                    { *m = CommitRequest{} }
 -func (m *CommitRequest) String() string            { return proto.CompactTextString(m) }
 -func (*CommitRequest) ProtoMessage()               {}
@@ -508,12 +508,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *CommitRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *CommitRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1491,9 +1447,9 @@
  }
- 
+
  func (m *CommitResponse) Reset()                    { *m = CommitResponse{} }
 -func (m *CommitResponse) String() string            { return proto.CompactTextString(m) }
 -func (*CommitResponse) ProtoMessage()               {}
@@ -521,12 +521,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *CommitResponse) String() string            { return "TODO" }
 +
 +
- 
+
  // RollbackRequest is the payload to Rollback
  type RollbackRequest struct {
 @@ -1504,9 +1460,9 @@
  }
- 
+
  func (m *RollbackRequest) Reset()                    { *m = RollbackRequest{} }
 -func (m *RollbackRequest) String() string            { return proto.CompactTextString(m) }
 -func (*RollbackRequest) ProtoMessage()               {}
@@ -534,12 +534,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *RollbackRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *RollbackRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1541,9 +1497,9 @@
  }
- 
+
  func (m *RollbackResponse) Reset()                    { *m = RollbackResponse{} }
 -func (m *RollbackResponse) String() string            { return proto.CompactTextString(m) }
 -func (*RollbackResponse) ProtoMessage()               {}
@@ -547,12 +547,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *RollbackResponse) String() string            { return "TODO" }
 +
 +
- 
+
  // PrepareRequest is the payload to Prepare
  type PrepareRequest struct {
 @@ -1555,9 +1511,9 @@
  }
- 
+
  func (m *PrepareRequest) Reset()                    { *m = PrepareRequest{} }
 -func (m *PrepareRequest) String() string            { return proto.CompactTextString(m) }
 -func (*PrepareRequest) ProtoMessage()               {}
@@ -560,12 +560,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *PrepareRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *PrepareRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1599,9 +1555,9 @@
  }
- 
+
  func (m *PrepareResponse) Reset()                    { *m = PrepareResponse{} }
 -func (m *PrepareResponse) String() string            { return proto.CompactTextString(m) }
 -func (*PrepareResponse) ProtoMessage()               {}
@@ -573,12 +573,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *PrepareResponse) String() string            { return "TODO" }
 +
 +
- 
+
  // CommitPreparedRequest is the payload to CommitPrepared
  type CommitPreparedRequest struct {
 @@ -1612,9 +1568,9 @@
  }
- 
+
  func (m *CommitPreparedRequest) Reset()                    { *m = CommitPreparedRequest{} }
 -func (m *CommitPreparedRequest) String() string            { return proto.CompactTextString(m) }
 -func (*CommitPreparedRequest) ProtoMessage()               {}
@@ -586,12 +586,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *CommitPreparedRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *CommitPreparedRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1649,9 +1605,9 @@
  }
- 
+
  func (m *CommitPreparedResponse) Reset()                    { *m = CommitPreparedResponse{} }
 -func (m *CommitPreparedResponse) String() string            { return proto.CompactTextString(m) }
 -func (*CommitPreparedResponse) ProtoMessage()               {}
@@ -599,12 +599,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *CommitPreparedResponse) String() string            { return "TODO" }
 +
 +
- 
+
  // RollbackPreparedRequest is the payload to RollbackPrepared
  type RollbackPreparedRequest struct {
 @@ -1663,9 +1619,9 @@
  }
- 
+
  func (m *RollbackPreparedRequest) Reset()                    { *m = RollbackPreparedRequest{} }
 -func (m *RollbackPreparedRequest) String() string            { return proto.CompactTextString(m) }
 -func (*RollbackPreparedRequest) ProtoMessage()               {}
@@ -612,12 +612,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *RollbackPreparedRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *RollbackPreparedRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1707,9 +1663,9 @@
  }
- 
+
  func (m *RollbackPreparedResponse) Reset()                    { *m = RollbackPreparedResponse{} }
 -func (m *RollbackPreparedResponse) String() string            { return proto.CompactTextString(m) }
 -func (*RollbackPreparedResponse) ProtoMessage()               {}
@@ -625,12 +625,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *RollbackPreparedResponse) String() string            { return "TODO" }
 +
 +
- 
+
  // CreateTransactionRequest is the payload to CreateTransaction
  type CreateTransactionRequest struct {
 @@ -1721,9 +1677,9 @@
  }
- 
+
  func (m *CreateTransactionRequest) Reset()                    { *m = CreateTransactionRequest{} }
 -func (m *CreateTransactionRequest) String() string            { return proto.CompactTextString(m) }
 -func (*CreateTransactionRequest) ProtoMessage()               {}
@@ -638,12 +638,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *CreateTransactionRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *CreateTransactionRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1765,9 +1721,9 @@
  }
- 
+
  func (m *CreateTransactionResponse) Reset()                    { *m = CreateTransactionResponse{} }
 -func (m *CreateTransactionResponse) String() string            { return proto.CompactTextString(m) }
 -func (*CreateTransactionResponse) ProtoMessage()               {}
@@ -651,12 +651,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *CreateTransactionResponse) String() string            { return "TODO" }
 +
 +
- 
+
  // StartCommitRequest is the payload to StartCommit
  type StartCommitRequest struct {
 @@ -1779,9 +1735,9 @@
  }
- 
+
  func (m *StartCommitRequest) Reset()                    { *m = StartCommitRequest{} }
 -func (m *StartCommitRequest) String() string            { return proto.CompactTextString(m) }
 -func (*StartCommitRequest) ProtoMessage()               {}
@@ -664,12 +664,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *StartCommitRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *StartCommitRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1823,9 +1779,9 @@
  }
- 
+
  func (m *StartCommitResponse) Reset()                    { *m = StartCommitResponse{} }
 -func (m *StartCommitResponse) String() string            { return proto.CompactTextString(m) }
 -func (*StartCommitResponse) ProtoMessage()               {}
@@ -677,12 +677,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *StartCommitResponse) String() string            { return "TODO" }
 +
 +
- 
+
  // SetRollbackRequest is the payload to SetRollback
  type SetRollbackRequest struct {
 @@ -1837,9 +1793,9 @@
  }
- 
+
  func (m *SetRollbackRequest) Reset()                    { *m = SetRollbackRequest{} }
 -func (m *SetRollbackRequest) String() string            { return proto.CompactTextString(m) }
 -func (*SetRollbackRequest) ProtoMessage()               {}
@@ -690,12 +690,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *SetRollbackRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *SetRollbackRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1881,9 +1837,9 @@
  }
- 
+
  func (m *SetRollbackResponse) Reset()                    { *m = SetRollbackResponse{} }
 -func (m *SetRollbackResponse) String() string            { return proto.CompactTextString(m) }
 -func (*SetRollbackResponse) ProtoMessage()               {}
@@ -703,12 +703,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *SetRollbackResponse) String() string            { return "TODO" }
 +
 +
- 
+
  // ConcludeTransactionRequest is the payload to ConcludeTransaction
  type ConcludeTransactionRequest struct {
 @@ -1894,9 +1850,9 @@
  }
- 
+
  func (m *ConcludeTransactionRequest) Reset()                    { *m = ConcludeTransactionRequest{} }
 -func (m *ConcludeTransactionRequest) String() string            { return proto.CompactTextString(m) }
 -func (*ConcludeTransactionRequest) ProtoMessage()               {}
@@ -716,12 +716,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *ConcludeTransactionRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *ConcludeTransactionRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1931,9 +1887,9 @@
  }
- 
+
  func (m *ConcludeTransactionResponse) Reset()                    { *m = ConcludeTransactionResponse{} }
 -func (m *ConcludeTransactionResponse) String() string            { return proto.CompactTextString(m) }
 -func (*ConcludeTransactionResponse) ProtoMessage()               {}
@@ -729,12 +729,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *ConcludeTransactionResponse) String() string            { return "TODO" }
 +
 +
- 
+
  // ReadTransactionRequest is the payload to ReadTransaction
  type ReadTransactionRequest struct {
 @@ -1944,9 +1900,9 @@
  }
- 
+
  func (m *ReadTransactionRequest) Reset()                    { *m = ReadTransactionRequest{} }
 -func (m *ReadTransactionRequest) String() string            { return proto.CompactTextString(m) }
 -func (*ReadTransactionRequest) ProtoMessage()               {}
@@ -742,12 +742,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *ReadTransactionRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *ReadTransactionRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -1982,9 +1938,9 @@
  }
- 
+
  func (m *ReadTransactionResponse) Reset()                    { *m = ReadTransactionResponse{} }
 -func (m *ReadTransactionResponse) String() string            { return proto.CompactTextString(m) }
 -func (*ReadTransactionResponse) ProtoMessage()               {}
@@ -755,12 +755,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *ReadTransactionResponse) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *ReadTransactionResponse) GetMetadata() *TransactionMetadata {
  	if m != nil {
 @@ -2003,9 +1959,9 @@
  }
- 
+
  func (m *BeginExecuteRequest) Reset()                    { *m = BeginExecuteRequest{} }
 -func (m *BeginExecuteRequest) String() string            { return proto.CompactTextString(m) }
 -func (*BeginExecuteRequest) ProtoMessage()               {}
@@ -768,12 +768,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *BeginExecuteRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *BeginExecuteRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -2054,9 +2010,9 @@
  }
- 
+
  func (m *BeginExecuteResponse) Reset()                    { *m = BeginExecuteResponse{} }
 -func (m *BeginExecuteResponse) String() string            { return proto.CompactTextString(m) }
 -func (*BeginExecuteResponse) ProtoMessage()               {}
@@ -781,12 +781,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *BeginExecuteResponse) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *BeginExecuteResponse) GetError() *vtrpc.RPCError {
  	if m != nil {
 @@ -2090,9 +2046,9 @@
  }
- 
+
  func (m *BeginExecuteBatchRequest) Reset()                    { *m = BeginExecuteBatchRequest{} }
 -func (m *BeginExecuteBatchRequest) String() string            { return proto.CompactTextString(m) }
 -func (*BeginExecuteBatchRequest) ProtoMessage()               {}
@@ -794,12 +794,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *BeginExecuteBatchRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *BeginExecuteBatchRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -2148,9 +2104,9 @@
  }
- 
+
  func (m *BeginExecuteBatchResponse) Reset()                    { *m = BeginExecuteBatchResponse{} }
 -func (m *BeginExecuteBatchResponse) String() string            { return proto.CompactTextString(m) }
 -func (*BeginExecuteBatchResponse) ProtoMessage()               {}
@@ -807,12 +807,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *BeginExecuteBatchResponse) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *BeginExecuteBatchResponse) GetError() *vtrpc.RPCError {
  	if m != nil {
 @@ -2183,9 +2139,9 @@
  }
- 
+
  func (m *MessageStreamRequest) Reset()                    { *m = MessageStreamRequest{} }
 -func (m *MessageStreamRequest) String() string            { return proto.CompactTextString(m) }
 -func (*MessageStreamRequest) ProtoMessage()               {}
@@ -820,12 +820,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *MessageStreamRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *MessageStreamRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -2221,9 +2177,9 @@
  }
- 
+
  func (m *MessageStreamResponse) Reset()                    { *m = MessageStreamResponse{} }
 -func (m *MessageStreamResponse) String() string            { return proto.CompactTextString(m) }
 -func (*MessageStreamResponse) ProtoMessage()               {}
@@ -833,12 +833,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *MessageStreamResponse) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *MessageStreamResponse) GetResult() *QueryResult {
  	if m != nil {
 @@ -2243,9 +2199,9 @@
  }
- 
+
  func (m *MessageAckRequest) Reset()                    { *m = MessageAckRequest{} }
 -func (m *MessageAckRequest) String() string            { return proto.CompactTextString(m) }
 -func (*MessageAckRequest) ProtoMessage()               {}
@@ -846,12 +846,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *MessageAckRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *MessageAckRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -2291,9 +2247,9 @@
  }
- 
+
  func (m *MessageAckResponse) Reset()                    { *m = MessageAckResponse{} }
 -func (m *MessageAckResponse) String() string            { return proto.CompactTextString(m) }
 -func (*MessageAckResponse) ProtoMessage()               {}
@@ -859,12 +859,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *MessageAckResponse) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *MessageAckResponse) GetResult() *QueryResult {
  	if m != nil {
 @@ -2317,9 +2273,9 @@
  }
- 
+
  func (m *SplitQueryRequest) Reset()                    { *m = SplitQueryRequest{} }
 -func (m *SplitQueryRequest) String() string            { return proto.CompactTextString(m) }
 -func (*SplitQueryRequest) ProtoMessage()               {}
@@ -872,12 +872,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *SplitQueryRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *SplitQueryRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -2386,9 +2342,9 @@
  }
- 
+
  func (m *QuerySplit) Reset()                    { *m = QuerySplit{} }
 -func (m *QuerySplit) String() string            { return proto.CompactTextString(m) }
 -func (*QuerySplit) ProtoMessage()               {}
@@ -885,12 +885,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *QuerySplit) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *QuerySplit) GetQuery() *BoundQuery {
  	if m != nil {
 @@ -2411,9 +2367,9 @@
  }
- 
+
  func (m *SplitQueryResponse) Reset()                    { *m = SplitQueryResponse{} }
 -func (m *SplitQueryResponse) String() string            { return proto.CompactTextString(m) }
 -func (*SplitQueryResponse) ProtoMessage()               {}
@@ -898,19 +898,19 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *SplitQueryResponse) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *SplitQueryResponse) GetQueries() []*QuerySplit {
  	if m != nil {
 @@ -2427,12 +2383,11 @@
  }
- 
+
  func (m *StreamHealthRequest) Reset()                    { *m = StreamHealthRequest{} }
 -func (m *StreamHealthRequest) String() string            { return proto.CompactTextString(m) }
 -func (*StreamHealthRequest) ProtoMessage()               {}
 -func (*StreamHealthRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{52} }
 +func (m *StreamHealthRequest) String() string            { return "TODO" }
 +
- 
+
 -// RealtimeStats contains information about the tablet status.
 -// It is only valid for a single tablet.
 +
@@ -920,7 +920,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
  	// or empty is the server is healthy. This is used for subset selection,
 @@ -2464,9 +2419,9 @@
  }
- 
+
  func (m *RealtimeStats) Reset()                    { *m = RealtimeStats{} }
 -func (m *RealtimeStats) String() string            { return proto.CompactTextString(m) }
 -func (*RealtimeStats) ProtoMessage()               {}
@@ -928,13 +928,13 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *RealtimeStats) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *RealtimeStats) GetHealthError() string {
  	if m != nil {
 @@ -2510,80 +2465,17 @@
  	return 0
  }
- 
+
 -// AggregateStats contains information about the health of a group of
 -// tablets for a Target.  It is used to propagate stats from a vtgate
 -// to another, or from the Gateway layer of a vtgate to the routing
@@ -1032,7 +1032,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
  	// hasn't changed in the meantime e.g. due to tablet restarts where ports or
 @@ -2620,9 +2508,9 @@
  }
- 
+
  func (m *StreamHealthResponse) Reset()                    { *m = StreamHealthResponse{} }
 -func (m *StreamHealthResponse) String() string            { return proto.CompactTextString(m) }
 -func (*StreamHealthResponse) ProtoMessage()               {}
@@ -1040,13 +1040,13 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *StreamHealthResponse) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *StreamHealthResponse) GetTarget() *Target {
  	if m != nil {
 @@ -2652,13 +2540,6 @@
  	return nil
  }
- 
+
 -func (m *StreamHealthResponse) GetAggregateStats() *AggregateStats {
 -	if m != nil {
 -		return m.AggregateStats
@@ -1059,7 +1059,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
  		return m.TabletAlias
 @@ -2682,9 +2563,9 @@
  }
- 
+
  func (m *UpdateStreamRequest) Reset()                    { *m = UpdateStreamRequest{} }
 -func (m *UpdateStreamRequest) String() string            { return proto.CompactTextString(m) }
 -func (*UpdateStreamRequest) ProtoMessage()               {}
@@ -1067,12 +1067,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *UpdateStreamRequest) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *UpdateStreamRequest) GetEffectiveCallerId() *vtrpc.CallerID {
  	if m != nil {
 @@ -2727,9 +2608,9 @@
  }
- 
+
  func (m *UpdateStreamResponse) Reset()                    { *m = UpdateStreamResponse{} }
 -func (m *UpdateStreamResponse) String() string            { return proto.CompactTextString(m) }
 -func (*UpdateStreamResponse) ProtoMessage()               {}
@@ -1080,12 +1080,12 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *UpdateStreamResponse) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *UpdateStreamResponse) GetEvent() *StreamEvent {
  	if m != nil {
 @@ -2747,9 +2628,9 @@
  }
- 
+
  func (m *TransactionMetadata) Reset()                    { *m = TransactionMetadata{} }
 -func (m *TransactionMetadata) String() string            { return proto.CompactTextString(m) }
 -func (*TransactionMetadata) ProtoMessage()               {}
@@ -1093,7 +1093,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 +func (m *TransactionMetadata) String() string            { return "TODO" }
 +
 +
- 
+
  func (m *TransactionMetadata) GetDtid() string {
  	if m != nil {
 @@ -2835,7 +2716,6 @@
@@ -1107,7 +1107,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//vt/proto/query/query.pb.go /Use
 @@ -2851,207 +2731,4 @@
  	proto.RegisterEnum("query.SplitQueryRequest_Algorithm", SplitQueryRequest_Algorithm_name, SplitQueryRequest_Algorithm_value)
  }
- 
+
 -func init() { proto.RegisterFile("query.proto", fileDescriptor0) }
 -
 -var fileDescriptor0 = []byte{

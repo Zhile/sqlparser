@@ -1,46 +1,46 @@
 Only in /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/: arithmetic.go
 Only in /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/: arithmetic_test.go
-diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/bind_variables.go /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/bind_variables.go
+diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/bind_variables.go /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/bind_variables.go
 --- /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/bind_variables.go	2018-06-05 08:45:47.000000000 -0700
-+++ /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/bind_variables.go	2018-06-04 08:05:24.000000000 -0700
++++ /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/bind_variables.go	2018-06-04 08:05:24.000000000 -0700
 @@ -19,11 +19,10 @@
  import (
  	"errors"
  	"fmt"
 +	"reflect"
  	"strconv"
- 
+
 -	"github.com/golang/protobuf/proto"
 -
 -	querypb "vitess.io/vitess/go/vt/proto/query"
-+	"github.com/xwb1989/sqlparser/dependency/querypb"
++	"github.com/Zhile/sqlparser/dependency/querypb"
  )
- 
+
  // NullBindVariable is a bindvar with NULL value.
 @@ -253,9 +252,8 @@
  }
- 
+
  // BindVariablesEqual compares two maps of bind variables.
 -// For protobuf messages we have to use "proto.Equal".
  func BindVariablesEqual(x, y map[string]*querypb.BindVariable) bool {
 -	return proto.Equal(&querypb.BoundQuery{BindVariables: x}, &querypb.BoundQuery{BindVariables: y})
 +	return reflect.DeepEqual(&querypb.BoundQuery{BindVariables: x}, &querypb.BoundQuery{BindVariables: y})
  }
- 
+
  // CopyBindVariables returns a shallow-copy of the given bindVariables map.
-diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/bind_variables_test.go /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/bind_variables_test.go
+diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/bind_variables_test.go /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/bind_variables_test.go
 --- /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/bind_variables_test.go	2018-06-05 08:45:47.000000000 -0700
-+++ /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/bind_variables_test.go	2018-06-04 08:05:24.000000000 -0700
++++ /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/bind_variables_test.go	2018-06-04 08:05:24.000000000 -0700
 @@ -21,16 +21,14 @@
  	"strings"
  	"testing"
- 
+
 -	"github.com/golang/protobuf/proto"
 -
 -	querypb "vitess.io/vitess/go/vt/proto/query"
-+	"github.com/xwb1989/sqlparser/dependency/querypb"
++	"github.com/Zhile/sqlparser/dependency/querypb"
  )
- 
+
  func TestProtoConversions(t *testing.T) {
  	v := TestValue(Int64, "1")
  	got := ValueToProto(v)
@@ -67,25 +67,25 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/bind_variables_test.go
 +		t.Errorf(" BindVarToValue(TUPLE): %v, want %s", err, wantErr)
  	}
  }
- 
+
 Only in /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/: event_token.go
 Only in /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/: event_token_test.go
-diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/plan_value.go /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/plan_value.go
+diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/plan_value.go /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/plan_value.go
 --- /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/plan_value.go	2018-06-05 08:45:47.000000000 -0700
-+++ /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/plan_value.go	2018-06-04 08:05:24.000000000 -0700
++++ /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/plan_value.go	2018-06-04 08:05:24.000000000 -0700
 @@ -18,10 +18,10 @@
- 
+
  import (
  	"encoding/json"
 +	"errors"
 +	"fmt"
- 
+
 -	querypb "vitess.io/vitess/go/vt/proto/query"
 -	vtrpcpb "vitess.io/vitess/go/vt/proto/vtrpc"
 -	"vitess.io/vitess/go/vt/vterrors"
-+	"github.com/xwb1989/sqlparser/dependency/querypb"
++	"github.com/Zhile/sqlparser/dependency/querypb"
  )
- 
+
  // PlanValue represents a value or a list of values for
 @@ -87,7 +87,7 @@
  	case pv.ListKey != "" || pv.Values != nil:
@@ -116,7 +116,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/plan_value.go /Users/b
 -	return nil, vterrors.New(vtrpcpb.Code_INVALID_ARGUMENT, "a single value was supplied where a list was expected")
 +	return nil, errors.New("a single value was supplied where a list was expected")
  }
- 
+
  func (pv PlanValue) lookupList(bindVars map[string]*querypb.BindVariable) (*querypb.BindVariable, error) {
  	bv, ok := bindVars[pv.ListKey]
  	if !ok {
@@ -137,52 +137,52 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/plan_value.go /Users/b
 +			return errors.New("mismatch in number of column values")
  		}
  	}
- 
+
 @@ -221,7 +221,7 @@
  		rows[i] = make([]Value, len(pvs))
  	}
- 
+
 -	// Using j because we're resolving by columns.
 +	// Using j becasue we're resolving by columns.
  	for j, pv := range pvs {
  		switch {
  		case pv.Key != "":
-diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/plan_value_test.go /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/plan_value_test.go
+diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/plan_value_test.go /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/plan_value_test.go
 --- /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/plan_value_test.go	2018-06-05 08:45:47.000000000 -0700
-+++ /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/plan_value_test.go	2018-06-04 08:05:24.000000000 -0700
++++ /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/plan_value_test.go	2018-06-04 08:05:24.000000000 -0700
 @@ -21,7 +21,7 @@
  	"strings"
  	"testing"
- 
+
 -	querypb "vitess.io/vitess/go/vt/proto/query"
-+	"github.com/xwb1989/sqlparser/dependency/querypb"
++	"github.com/Zhile/sqlparser/dependency/querypb"
  )
- 
+
  func TestPlanValueIsNull(t *testing.T) {
 Only in /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/: proto3.go
 Only in /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/: proto3_test.go
 Only in /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/: query_response.go
 Only in /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/: result.go
 Only in /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/: result_test.go
-diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/testing.go /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/testing.go
+diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/testing.go /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/testing.go
 --- /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/testing.go	2018-06-05 08:45:47.000000000 -0700
-+++ /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/testing.go	2018-06-04 08:06:27.000000000 -0700
++++ /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/testing.go	2018-06-04 08:06:27.000000000 -0700
 @@ -17,17 +17,14 @@
  package sqltypes
- 
+
  import (
 -	"bytes"
 -	"fmt"
 -	"strings"
 -
 -	querypb "vitess.io/vitess/go/vt/proto/query"
-+	querypb "github.com/xwb1989/sqlparser/dependency/querypb"
++	querypb "github.com/Zhile/sqlparser/dependency/querypb"
  )
- 
+
  // Functions in this file should only be used for testing.
  // This is an experiment to see if test code bloat can be
  // reduced and readability improved.
- 
+
 +/*
  // MakeTestFields builds a []*querypb.Field for testing.
  //   fields := sqltypes.MakeTestFields(
@@ -192,13 +192,13 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/testing.go /Users/bram
  	return results
  }
 +*/
- 
+
  // TestBindVariable makes a *querypb.BindVariable from
  // an interface{}.It panics on invalid input.
 @@ -131,6 +129,7 @@
  	return MakeTrusted(typ, []byte(val))
  }
- 
+
 +/*
  // PrintResults prints []*Results into a string.
  // This function should only be used for testing.
@@ -208,50 +208,50 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/testing.go /Users/bram
  	return splits
  }
 +*/
-diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/type.go /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/type.go
+diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/type.go /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/type.go
 --- /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/type.go	2018-06-05 08:45:47.000000000 -0700
-+++ /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/type.go	2018-06-04 08:05:24.000000000 -0700
++++ /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/type.go	2018-06-04 08:05:24.000000000 -0700
 @@ -19,7 +19,7 @@
  import (
  	"fmt"
- 
+
 -	querypb "vitess.io/vitess/go/vt/proto/query"
-+	"github.com/xwb1989/sqlparser/dependency/querypb"
++	"github.com/Zhile/sqlparser/dependency/querypb"
  )
- 
+
  // This file provides wrappers and support
-diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/type_test.go /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/type_test.go
+diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/type_test.go /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/type_test.go
 --- /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/type_test.go	2018-06-05 08:45:47.000000000 -0700
-+++ /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/type_test.go	2018-06-04 08:05:24.000000000 -0700
++++ /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/type_test.go	2018-06-04 08:05:24.000000000 -0700
 @@ -19,7 +19,7 @@
  import (
  	"testing"
- 
+
 -	querypb "vitess.io/vitess/go/vt/proto/query"
-+	"github.com/xwb1989/sqlparser/dependency/querypb"
++	"github.com/Zhile/sqlparser/dependency/querypb"
  )
- 
+
  func TestTypeValues(t *testing.T) {
-diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/value.go /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/value.go
+diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/value.go /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/value.go
 --- /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/value.go	2018-06-05 08:45:47.000000000 -0700
-+++ /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/value.go	2018-06-04 08:05:24.000000000 -0700
++++ /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/value.go	2018-06-04 08:05:24.000000000 -0700
 @@ -23,10 +23,10 @@
  	"fmt"
  	"strconv"
- 
+
 -	"vitess.io/vitess/go/bytes2"
 -	"vitess.io/vitess/go/hack"
-+	"github.com/xwb1989/sqlparser/dependency/bytes2"
-+	"github.com/xwb1989/sqlparser/dependency/hack"
- 
++	"github.com/Zhile/sqlparser/dependency/bytes2"
++	"github.com/Zhile/sqlparser/dependency/hack"
+
 -	querypb "vitess.io/vitess/go/vt/proto/query"
-+	"github.com/xwb1989/sqlparser/dependency/querypb"
++	"github.com/Zhile/sqlparser/dependency/querypb"
  )
- 
+
  var (
 @@ -48,7 +48,7 @@
  }
- 
+
  // Value can store any SQL value. If the value represents
 -// an integral type, the bytes are always stored as a canonical
 +// an integral type, the bytes are always stored as a cannonical
@@ -261,7 +261,7 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/value.go /Users/bramp/
 @@ -126,7 +126,7 @@
  	return MakeTrusted(VarBinary, []byte(v))
  }
- 
+
 -// NewIntegral builds an integral type from a string representation.
 +// NewIntegral builds an integral type from a string representaion.
  // The type will be Int64 or Uint64. Int64 will be preferred where possible.
@@ -270,21 +270,21 @@ diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/value.go /Users/bramp/
 @@ -169,7 +169,7 @@
  	return v.typ
  }
- 
+
 -// Raw returns the internal representation of the value. For newer types,
 +// Raw returns the internal represenation of the value. For newer types,
  // this may not match MySQL's representation.
  func (v Value) Raw() []byte {
  	return v.val
-diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/value_test.go /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/value_test.go
+diff -u /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/value_test.go /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/value_test.go
 --- /Users/bramp/go/src/vitess.io/vitess/go//sqltypes/value_test.go	2018-06-05 08:45:47.000000000 -0700
-+++ /Users/bramp/go/src/github.com/xwb1989/sqlparser//dependency/sqltypes/value_test.go	2018-06-04 08:05:24.000000000 -0700
++++ /Users/bramp/go/src/github.com/Zhile/sqlparser//dependency/sqltypes/value_test.go	2018-06-04 08:05:24.000000000 -0700
 @@ -22,7 +22,7 @@
  	"strings"
  	"testing"
- 
+
 -	querypb "vitess.io/vitess/go/vt/proto/query"
-+	"github.com/xwb1989/sqlparser/dependency/querypb"
++	"github.com/Zhile/sqlparser/dependency/querypb"
  )
- 
+
  const (
