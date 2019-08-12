@@ -3108,10 +3108,11 @@ func (node *Limit) Format(buf *TrackedBuffer) {
 		return
 	}
 	buf.Myprintf(" limit ")
+	buf.Myprintf("%v", node.Rowcount)
 	if node.Offset != nil {
+		buf.Myprintf(" offset ")
 		buf.Myprintf("%v, ", node.Offset)
 	}
-	buf.Myprintf("%v", node.Rowcount)
 }
 
 func (node *Limit) walkSubtree(visit Visit) error {
