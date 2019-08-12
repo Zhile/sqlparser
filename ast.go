@@ -3111,7 +3111,7 @@ func (node *Limit) Format(buf *TrackedBuffer) {
 	buf.Myprintf("%v", node.Rowcount)
 	if node.Offset != nil {
 		buf.Myprintf(" offset ")
-		buf.Myprintf("%v, ", node.Offset)
+		buf.Myprintf("%v", node.Offset)
 	}
 }
 
