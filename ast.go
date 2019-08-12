@@ -2103,7 +2103,7 @@ const (
 	GreaterThanStr       = ">"
 	LessEqualStr         = "<="
 	GreaterEqualStr      = ">="
-	NotEqualStr          = "!="
+	NotEqualStr          = "<>"
 	NullSafeEqualStr     = "<=>"
 	InStr                = "in"
 	NotInStr             = "not in"
